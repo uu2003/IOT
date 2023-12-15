@@ -1,0 +1,837 @@
+[
+    {
+        "id": "7c6e5bfbceb37e4c",
+        "type": "tab",
+        "label": "Waiting Room Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f90118f6f47233fe",
+        "type": "tab",
+        "label": "Doctor's System Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "72692f8c.1a55a",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#26a215",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#26a215",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#26a215",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#39e221",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#26a215",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "light-blue",
+                "accents": "blue",
+                "warn": "red",
+                "background": "blue-grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Hospital IoT System",
+            "hideToolbar": "false",
+            "allowSwipe": "true",
+            "lockMenu": "true",
+            "allowTempTheme": "none",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 44,
+                "sy": 48,
+                "gx": 4,
+                "gy": 10,
+                "cx": 4,
+                "cy": 10,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "ccac4efd629c09d6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ba7397788c90e5f3",
+        "type": "mongodb-aleph-config",
+        "hostname": "cluster0.nfyngjg.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "iot_pranjal",
+        "name": ""
+    },
+    {
+        "id": "5c14730454d96b49",
+        "type": "ui_tab",
+        "name": "Waiting Room",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "41375e0622c96a09",
+        "type": "ui_group",
+        "name": "Waiting Room Status",
+        "tab": "5c14730454d96b49",
+        "order": 1,
+        "disp": true,
+        "width": 20,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9c5a677817af970a",
+        "type": "ui_tab",
+        "name": "Doctor's System",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "42d21b9911841a70",
+        "type": "ui_group",
+        "name": "Waiting Room Records",
+        "tab": "9c5a677817af970a",
+        "order": 1,
+        "disp": false,
+        "width": 25,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5b97e0ced4303dde",
+        "type": "mqtt in",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "MQTT IN",
+        "topic": "H00448888/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "ccac4efd629c09d6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "7782924c5f72b236",
+                "afa8f7961704de2b",
+                "c5e482c34b66a90c",
+                "5357fb4318e61c93",
+                "5dcedecdd2180f96"
+            ]
+        ]
+    },
+    {
+        "id": "7782924c5f72b236",
+        "type": "debug",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "Debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "afa8f7961704de2b",
+        "type": "change",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "Message_chair_a",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.chaira",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "f021cef442e1ad3b"
+            ]
+        ]
+    },
+    {
+        "id": "c5e482c34b66a90c",
+        "type": "change",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "Message_status_a",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.statusa",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "5f5af56231556e05"
+            ]
+        ]
+    },
+    {
+        "id": "f021cef442e1ad3b",
+        "type": "ui_text",
+        "z": "7c6e5bfbceb37e4c",
+        "group": "41375e0622c96a09",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Seat Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": "20",
+        "color": "#000000",
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5f5af56231556e05",
+        "type": "ui_text",
+        "z": "7c6e5bfbceb37e4c",
+        "group": "41375e0622c96a09",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": "20",
+        "color": "#2257d3",
+        "x": 690,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5357fb4318e61c93",
+        "type": "change",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "Message_chair_b",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.chairb",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 460,
+        "wires": [
+            [
+                "ad8fe00c45e36b91"
+            ]
+        ]
+    },
+    {
+        "id": "5dcedecdd2180f96",
+        "type": "change",
+        "z": "7c6e5bfbceb37e4c",
+        "name": "Message_status_b",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.statusb",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "6670b15a11932e4c"
+            ]
+        ]
+    },
+    {
+        "id": "ad8fe00c45e36b91",
+        "type": "ui_text",
+        "z": "7c6e5bfbceb37e4c",
+        "group": "41375e0622c96a09",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Seat Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": "20",
+        "color": "#0d0d0d",
+        "x": 730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "6670b15a11932e4c",
+        "type": "ui_text",
+        "z": "7c6e5bfbceb37e4c",
+        "group": "41375e0622c96a09",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": "20",
+        "color": "#0f45e6",
+        "x": 710,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "0fca862b90816e67",
+        "type": "mqtt in",
+        "z": "f90118f6f47233fe",
+        "name": "MQTT IN",
+        "topic": "H00448888/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "ccac4efd629c09d6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "4a6fa5ee6e7c738c",
+                "ec0446986db48b88",
+                "298a9557b33c0274",
+                "de2b838eb8e4469d",
+                "42b3bb6420a48d8b",
+                "994f3fb51d3185ac"
+            ]
+        ]
+    },
+    {
+        "id": "4a6fa5ee6e7c738c",
+        "type": "change",
+        "z": "f90118f6f47233fe",
+        "name": "Message_Time_Spent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.timespenta",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "dd3b2d2c504bb92a"
+            ]
+        ]
+    },
+    {
+        "id": "dd3b2d2c504bb92a",
+        "type": "ui_chart",
+        "z": "f90118f6f47233fe",
+        "name": "Seat A Bar Chart",
+        "group": "42d21b9911841a70",
+        "order": 8,
+        "width": "12",
+        "height": "8",
+        "label": "Total Time Spent Seat A",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "500",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": true,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 610,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec0446986db48b88",
+        "type": "change",
+        "z": "f90118f6f47233fe",
+        "name": "Message_Occupied_Seats_Total",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.occupieda",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "29a206e8d3250951"
+            ]
+        ]
+    },
+    {
+        "id": "29a206e8d3250951",
+        "type": "ui_gauge",
+        "z": "f90118f6f47233fe",
+        "name": "Seat A Donut",
+        "group": "42d21b9911841a70",
+        "order": 1,
+        "width": 12,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Total No. of Patients Seat A",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 670,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "de2b838eb8e4469d",
+        "type": "change",
+        "z": "f90118f6f47233fe",
+        "name": "Message_Occupied_Seats_Total",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.occupiedb",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "0c83aa044b53a82a"
+            ]
+        ]
+    },
+    {
+        "id": "298a9557b33c0274",
+        "type": "change",
+        "z": "f90118f6f47233fe",
+        "name": "Message_Time_Spent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.d.timespentb",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "1ce355de122e6d41"
+            ]
+        ]
+    },
+    {
+        "id": "1ce355de122e6d41",
+        "type": "ui_chart",
+        "z": "f90118f6f47233fe",
+        "name": "Seat B Bar Chart",
+        "group": "42d21b9911841a70",
+        "order": 9,
+        "width": "12",
+        "height": "8",
+        "label": "Total Time Spent Seat B",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "0",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": true,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 630,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c83aa044b53a82a",
+        "type": "ui_gauge",
+        "z": "f90118f6f47233fe",
+        "name": "Seat B Donut",
+        "group": "42d21b9911841a70",
+        "order": 2,
+        "width": 12,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Total No. of Patients Seat B",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "42b3bb6420a48d8b",
+        "type": "function",
+        "z": "f90118f6f47233fe",
+        "name": "Format MongoDB Record_B",
+        "func": "msg.payload = {\n    chairb: msg.payload.d.chairb,\n    statusb: msg.payload.d.statusb,\n    timespentb: msg.payload.d.timespentb,\n    occupiedb: msg.payload.d.occupiedb,\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "e0f480d936576faf",
+                "515a8fd07a3710b8"
+            ]
+        ]
+    },
+    {
+        "id": "994f3fb51d3185ac",
+        "type": "function",
+        "z": "f90118f6f47233fe",
+        "name": "Format MongoDB Record_A",
+        "func": "msg.payload = {\n    chaira: msg.payload.d.chaira,\n    statusa: msg.payload.d.statusa,\n    timespenta: msg.payload.d.timespenta,\n    occupieda: msg.payload.d.occupieda,\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 120,
+        "wires": [
+            [
+                "515a8fd07a3710b8",
+                "e0f480d936576faf"
+            ]
+        ]
+    },
+    {
+        "id": "515a8fd07a3710b8",
+        "type": "debug",
+        "z": "f90118f6f47233fe",
+        "name": "Debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e0f480d936576faf",
+        "type": "mongodb-aleph-out",
+        "z": "f90118f6f47233fe",
+        "mongodb": "ba7397788c90e5f3",
+        "name": "MongoDB",
+        "collection": "Doc_Sys",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 620,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa63a332cbc6c98b",
+        "type": "ui_switch",
+        "z": "f90118f6f47233fe",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "42d21b9911841a70",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload.Seconds",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"Interval\":1}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"Interval\":2}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 650,
+        "y": 620,
+        "wires": [
+            [
+                "215364620fa501e5"
+            ]
+        ]
+    },
+    {
+        "id": "215364620fa501e5",
+        "type": "mqtt out",
+        "z": "f90118f6f47233fe",
+        "name": "MQTT OUT",
+        "topic": "H00448888/cmd/interval/fmt/json",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ccac4efd629c09d6",
+        "x": 850,
+        "y": 620,
+        "wires": []
+    }
+]
